@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Dark theme (default) -->
+    <SolidColorBrush x:Key="BgBrush" Color="#111418"/>
+    <SolidColorBrush x:Key="PanelBrush" Color="#1B2027"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#2E3640"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#E8ECF0"/>
+    <SolidColorBrush x:Key="MutedBrush" Color="#8A96A3"/>
+    <SolidColorBrush x:Key="ButtonBrush" Color="#2A323C"/>
+    <SolidColorBrush x:Key="ButtonHoverBrush" Color="#38424E"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="#0F5FD6"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="#5A1F1F"/>
+    <SolidColorBrush x:Key="OkBrush" Color="#22A55B"/>
+    <SolidColorBrush x:Key="WarnBrush" Color="#F2A900"/>
+    <SolidColorBrush x:Key="BadBrush" Color="#D64545"/>
+    <SolidColorBrush x:Key="IdleBrush" Color="#3A434E"/>
+    <SolidColorBrush x:Key="ArrowIdleBrush" Color="#56616E"/>
+</ResourceDictionary>

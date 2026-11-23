@@ -1,0 +1,165 @@
+﻿<Window x:Class="VisorIV4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="{DynamicResource S_Title}" Height="900" Width="1600" MinWidth="900" MinHeight="600"
+        Background="{DynamicResource BgBrush}" Foreground="{DynamicResource TextBrush}" WindowStartupLocation="CenterScreen"
+        Loaded="OnLoaded" Closed="OnClosed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ===== Header ===== -->
+        <Border Grid.Row="0" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="{DynamicResource AccentBrush}" TextElement.Foreground="White" CornerRadius="6" Padding="14,4" MinWidth="86">
+                        <StackPanel>
+                            <TextBlock Text="{DynamicResource S_Program}" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" Opacity="0.85"/>
+                            <TextBlock x:Name="ProgramNumberText" Text="--" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,-4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock x:Name="ProgramNameText" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0"/>
+                </StackPanel>
+
+                <ComboBox x:Name="ManualProgramCombo" Grid.Column="1" Width="220" Height="34" Margin="20,0,0,0" FontSize="15"
+                          VerticalAlignment="Center" VerticalContentAlignment="Center" Visibility="Collapsed"
+                          SelectionChanged="OnManualProgramChanged" ToolTip="{DynamicResource S_ManualTip}"/>
+
+                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
+                    <Border x:Name="PlcPill" CornerRadius="12" Padding="12,4" Margin="4,0" Background="{DynamicResource IdleBrush}">
+                        <TextBlock x:Name="PlcPillText" Foreground="White" Text="PLC: --" FontSize="13" FontWeight="SemiBold"/>
+                    </Border>
+                    <Border x:Name="CamPill" CornerRadius="12" Padding="12,4" Margin="4,0" Background="{DynamicResource IdleBrush}">
+                        <TextBlock x:Name="CamPillText" Foreground="White" Text="--" FontSize="13" FontWeight="SemiBold"/>
+                    </Border>
+                    <TextBlock x:Name="ClockText" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0"
+                               Foreground="{DynamicResource MutedBrush}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="GhostButton" Style="{StaticResource FlatButton}" Content="{DynamicResource S_Ghost}"
+                            ToolTip="{DynamicResource S_GhostTip}" Click="OnToggleGhost"/>
+                    <Button Style="{StaticResource FlatButton}" Content="{DynamicResource S_ReloadCamera}" Click="OnReloadCamera"/>
+                    <Button Style="{StaticResource FlatButton}" Content="{DynamicResource S_LangButton}" FontWeight="Bold" MinWidth="48"
+                            ToolTip="{DynamicResource S_LangTip}" Click="OnToggleLanguage"/>
+                    <Button Style="{StaticResource FlatButton}" Content="⚙" FontSize="18" Padding="10,2" Click="OnAdmin" ToolTip="{DynamicResource S_Admin}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ===== Content: reference + camera ===== -->
+        <Grid x:Name="ContentGrid" Grid.Row="1" Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="Row0" Height="*"/>
+                <RowDefinition x:Name="Row1" Height="0"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="Col0" Width="*"/>
+                <ColumnDefinition x:Name="Col1" Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="RefPane" Margin="4" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="6">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource PaneTitle}" Text="{DynamicResource S_RefTitle}"/>
+                    <Grid Margin="8,0,8,8">
+                        <Image x:Name="RefImage" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock x:Name="RefMissingText" FontSize="22" Foreground="{DynamicResource MutedBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+                    </Grid>
+                </DockPanel>
+            </Border>
+
+            <Border x:Name="CamPane" Grid.Column="1" Margin="4" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="6">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top">
+                        <TextBlock x:Name="FpsText" DockPanel.Dock="Right" Style="{StaticResource PaneTitle}" FontWeight="Normal" FontFamily="Consolas"/>
+                        <TextBlock x:Name="CamTitleText" Style="{StaticResource PaneTitle}"/>
+                    </DockPanel>
+                    <Grid Margin="8,0,8,8" Background="Black">
+                        <!-- Direct image mode (/iliveimage.jpg) -->
+                        <Image x:Name="LiveImage" Stretch="Uniform" Visibility="Hidden" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <!-- Ghost overlay: reference image over the live image (shown even if the camera is offline) -->
+                        <Image x:Name="GhostImage" Stretch="Uniform" Visibility="Hidden" IsHitTestVisible="False"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <!-- Ghost mode without a reference image for the active program -->
+                        <Border x:Name="GhostMissingPanel" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                Margin="0,12,0,0" Padding="14,6" CornerRadius="6" Background="#CC1E242C">
+                            <TextBlock x:Name="GhostMissingText" FontSize="16" TextAlignment="Center" TextWrapping="Wrap"
+                                       Foreground="{DynamicResource WarnBrush}"/>
+                        </Border>
+                        <!-- WebView2 renders above any WPF control; the notice is shown by hiding the viewer. -->
+                        <Border x:Name="CamOfflinePanel" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20,12" CornerRadius="6" Background="#B3000000">
+                            <StackPanel>
+                                <TextBlock x:Name="CamOfflineText" Foreground="White" FontSize="22" TextAlignment="Center" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="CamOfflineDetail" FontSize="14" Foreground="#B0B8C2" TextAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                        <!-- Web page mode -->
+                        <wv2:WebView2 x:Name="CameraView" Visibility="Hidden"/>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- ===== Position bar (X / Y from PLC) ===== -->
+        <Border x:Name="DirBar" Grid.Row="2" Height="150" Margin="12,0,12,12" CornerRadius="8" Background="{DynamicResource IdleBrush}" TextElement.Foreground="White">
+            <Grid Margin="20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Arrow cross: lights up toward where the operator must MOVE the part -->
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                    <Border x:Name="ArrowUp" Grid.Row="0" Grid.Column="1" Style="{StaticResource Arrow}"><TextBlock Text="▲" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                    <Border x:Name="ArrowLeft" Grid.Row="1" Grid.Column="0" Style="{StaticResource Arrow}"><TextBlock Text="◀" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                    <Border x:Name="CenterDot" Grid.Row="1" Grid.Column="1" Style="{StaticResource Arrow}" CornerRadius="23"><TextBlock x:Name="CenterDotText" Text="•" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                    <Border x:Name="ArrowRight" Grid.Row="1" Grid.Column="2" Style="{StaticResource Arrow}"><TextBlock Text="▶" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                    <Border x:Name="ArrowDown" Grid.Row="2" Grid.Column="1" Style="{StaticResource Arrow}"><TextBlock Text="▼" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                </Grid>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="32,0">
+                    <TextBlock x:Name="DirTitle" FontSize="38" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="DirDetail" FontSize="20" Margin="0,4,0,0" Opacity="0.9" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" MinWidth="200">
+                    <TextBlock x:Name="ValueX" Text="X: --" FontSize="28" FontWeight="SemiBold" FontFamily="Consolas"/>
+                    <TextBlock x:Name="ValueY" Text="Y: --" FontSize="28" FontWeight="SemiBold" FontFamily="Consolas"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ===== Auto-hide title bar (maximized, non-kiosk): appears when the cursor touches the top edge ===== -->
+        <Border x:Name="TitleHotZone" Grid.Row="0" Height="6" VerticalAlignment="Top" Background="Transparent"
+                Panel.ZIndex="10" Visibility="Collapsed" MouseEnter="OnTitleHotZoneEnter"/>
+        <Border x:Name="AutoTitleBar" Grid.Row="0" Height="32" VerticalAlignment="Top" Background="#F3F3F3"
+                Panel.ZIndex="11" Visibility="Collapsed" MouseEnter="OnAutoTitleEnter" MouseLeave="OnAutoTitleLeave"
+                MouseLeftButtonDown="OnAutoTitleMouseDown">
+            <Border.Effect><DropShadowEffect BlurRadius="8" ShadowDepth="1" Opacity="0.5"/></Border.Effect>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Style="{StaticResource CaptionButton}" Content="&#xE921;" Click="OnCaptionMinimize"/>
+                    <Button Style="{StaticResource CaptionButton}" Content="&#xE923;" Click="OnCaptionRestore"/>
+                    <Button Style="{StaticResource CaptionButton}" Content="&#xE8BB;" Click="OnCaptionClose" Tag="close"/>
+                </StackPanel>
+                <TextBlock Text="{DynamicResource S_Title}" Foreground="#1A1A1A" FontSize="12" VerticalAlignment="Center" Margin="12,0,0,0"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

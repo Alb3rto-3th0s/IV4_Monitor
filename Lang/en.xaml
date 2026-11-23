@@ -1,0 +1,149 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    <!-- ===== Language toggle (shows the OTHER language) ===== -->
+    <sys:String x:Key="S_LangButton">ES</sys:String>
+    <sys:String x:Key="S_LangTip">Cambiar a español</sys:String>
+
+    <!-- ===== Main window ===== -->
+    <sys:String x:Key="S_Title">Ethos - IV4 Viewer</sys:String>
+    <sys:String x:Key="S_Program">PROGRAM</sys:String>
+    <sys:String x:Key="S_NoProgram">No program</sys:String>
+    <sys:String x:Key="S_ProgramN">Program {0:00}</sys:String>
+    <sys:String x:Key="S_ProgramOutOfRange">Program out of range</sys:String>
+    <sys:String x:Key="S_ManualTip">Manual selection (PLC disabled)</sys:String>
+    <sys:String x:Key="S_ReloadCamera">⟳ Reload camera</sys:String>
+    <sys:String x:Key="S_Admin">Administration</sys:String>
+    <sys:String x:Key="S_RefTitle">REFERENCE · CORRECT POSITION</sys:String>
+    <sys:String x:Key="S_CamTitle">IV4 CAMERA · LIVE</sys:String>
+    <sys:String x:Key="S_NoRef">No reference image</sys:String>
+    <sys:String x:Key="S_NoRefFor">No reference image for program {0:00}&#10;Load it from Administration (⚙)</sys:String>
+    <sys:String x:Key="S_PlcOutOfRange">PLC reports program {0}, outside range 1–{1}</sys:String>
+
+    <sys:String x:Key="S_PlcManual">PLC: MANUAL</sys:String>
+    <sys:String x:Key="S_PlcConnecting">PLC: CONNECTING…</sys:String>
+    <sys:String x:Key="S_PlcOk">PLC: OK</sys:String>
+    <sys:String x:Key="S_PlcOffline">PLC: OFFLINE</sys:String>
+    <sys:String x:Key="S_CamConnecting">CAMERA: CONNECTING…</sys:String>
+    <sys:String x:Key="S_CamOk">CAMERA: OK</sys:String>
+    <sys:String x:Key="S_CamOffline">CAMERA: OFFLINE</sys:String>
+
+    <sys:String x:Key="S_CamConnectingMsg">Connecting to camera…</sys:String>
+    <sys:String x:Key="S_CamNoWebView">Could not start the web viewer</sys:String>
+    <sys:String x:Key="S_CamNoWebViewDetail">Install Microsoft Edge WebView2 Runtime.</sys:String>
+    <sys:String x:Key="S_CamStopped">The web viewer stopped</sys:String>
+    <sys:String x:Key="S_Retrying">Retrying…</sys:String>
+    <sys:String x:Key="S_CamBadUrl">Invalid camera URL</sys:String>
+    <sys:String x:Key="S_CamOpenFail">Could not open the viewer</sys:String>
+    <sys:String x:Key="S_CamNoConn">No connection to camera</sys:String>
+    <sys:String x:Key="S_CamNoConnDetail">{0}  ({1}) — retrying every 5 s</sys:String>
+    <sys:String x:Key="S_CamNoResponse">Camera not responding</sys:String>
+    <sys:String x:Key="S_CamNoResponseDetail">{0} — retrying…</sys:String>
+
+    <sys:String x:Key="S_NoPos">NO POSITION DATA</sys:String>
+    <sys:String x:Key="S_NoPosHint">Use the reference image to place the part.</sys:String>
+    <sys:String x:Key="S_WaitPlc">Waiting for PLC data…</sys:String>
+    <sys:String x:Key="S_NoPlcComm">No communication with PLC</sys:String>
+    <sys:String x:Key="S_PosOk">POSITION OK</sys:String>
+    <sys:String x:Key="S_PosOkDetail">The part is within tolerance.</sys:String>
+    <sys:String x:Key="S_MoveTo">MOVE PART TOWARD  {0}</sys:String>
+    <sys:String x:Key="S_Shifted">Part shifted in {0}. Adjust until POSITION OK is shown.</sys:String>
+    <sys:String x:Key="S_And"> and </sys:String>
+
+    <sys:String x:Key="S_SaveCfgError">Could not save configuration:&#10;{0}</sys:String>
+    <sys:String x:Key="S_AlreadyRunning">IV4 Viewer is already running.</sys:String>
+    <sys:String x:Key="S_AppName">IV4 Viewer</sys:String>
+
+    <!-- ===== Password ===== -->
+    <sys:String x:Key="S_PwdPrompt">Administrator password</sys:String>
+    <sys:String x:Key="S_PwdWrong">Wrong password</sys:String>
+    <sys:String x:Key="S_Cancel">Cancel</sys:String>
+    <sys:String x:Key="S_Enter">Enter</sys:String>
+
+    <!-- ===== Administration ===== -->
+    <sys:String x:Key="S_AdminTitle">IV4 Viewer – Administration</sys:String>
+    <sys:String x:Key="S_ExitApp">Close application</sys:String>
+    <sys:String x:Key="S_Save">Save</sys:String>
+    <sys:String x:Key="S_SecCamera">Camera viewer</sys:String>
+    <sys:String x:Key="S_CamUrl">Viewer URL</sys:String>
+    <sys:String x:Key="S_Zoom">Zoom (0.25 – 5)</sys:String>
+    <sys:String x:Key="S_ReloadEvery">Reload every (min)</sys:String>
+    <sys:String x:Key="S_ZeroNever">0 = never</sys:String>
+    <sys:String x:Key="S_SecDisplay">Display</sys:String>
+    <sys:String x:Key="S_Language">Language</sys:String>
+    <sys:String x:Key="S_Layout">Layout</sys:String>
+    <sys:String x:Key="S_LayoutH">Horizontal (side by side)</sys:String>
+    <sys:String x:Key="S_LayoutV">Vertical (top / bottom)</sys:String>
+    <sys:String x:Key="S_RefPct">% for reference</sys:String>
+    <sys:String x:Key="S_NewPwd">New password</sys:String>
+    <sys:String x:Key="S_NewPwdTip">Leave empty to keep the current one</sys:String>
+    <sys:String x:Key="S_RefFirst">Reference on the left / top</sys:String>
+    <sys:String x:Key="S_Kiosk">Kiosk mode (full screen, can only be closed from here)</sys:String>
+    <sys:String x:Key="S_SecPlc">Allen-Bradley PLC (EtherNet/IP, read only)</sys:String>
+    <sys:String x:Key="S_PlcEnable">Read active program from PLC</sys:String>
+    <sys:String x:Key="S_PlcIp">PLC IP</sys:String>
+    <sys:String x:Key="S_PlcType">PLC type</sys:String>
+    <sys:String x:Key="S_PlcPath">Path</sys:String>
+    <sys:String x:Key="S_PlcPathTip">ControlLogix/CompactLogix: 1,0 (CPU slot). Micro800: empty.</sys:String>
+    <sys:String x:Key="S_ProgTag">Program tag</sys:String>
+    <sys:String x:Key="S_ProgOffset">Program offset</sys:String>
+    <sys:String x:Key="S_ProgOffsetTip">Added to the value read. E.g. 1 if the PLC uses 0..19</sys:String>
+    <sys:String x:Key="S_Poll">Read every (ms)</sys:String>
+    <sys:String x:Key="S_ReadOffsets">Read X / Y offset and show arrows</sys:String>
+    <sys:String x:Key="S_XTag">X offset tag</sys:String>
+    <sys:String x:Key="S_YTag">Y offset tag</sys:String>
+    <sys:String x:Key="S_Tol">Tolerance X / Y</sys:String>
+    <sys:String x:Key="S_TolX">Tolerance X</sys:String>
+    <sys:String x:Key="S_TolY">Tolerance Y</sys:String>
+    <sys:String x:Key="S_Units">Units</sys:String>
+    <sys:String x:Key="S_InvX">Invert X axis (if the arrow is reversed)</sys:String>
+    <sys:String x:Key="S_InvY">Invert Y axis (if the arrow is reversed)</sys:String>
+    <sys:String x:Key="S_SecRefs">Reference images per program</sys:String>
+    <sys:String x:Key="S_Folder">Folder: {0}</sys:String>
+    <sys:String x:Key="S_RefNote">Images are copied when loaded. Names are saved with the Save button.</sys:String>
+    <sys:String x:Key="S_LoadImg">Load image…</sys:String>
+    <sys:String x:Key="S_Remove">Remove</sys:String>
+    <sys:String x:Key="S_NoImage">no image</sys:String>
+    <sys:String x:Key="S_NameTip">Program name / part number</sys:String>
+    <sys:String x:Key="S_ImgFilter">Images</sys:String>
+    <sys:String x:Key="S_ImgDlgTitle">Reference image – program {0:00}</sys:String>
+    <sys:String x:Key="S_CopyFail">Could not copy the image:&#10;{0}</sys:String>
+    <sys:String x:Key="S_RemoveAsk">Remove the reference image for program {0:00}?</sys:String>
+    <sys:String x:Key="S_RemoveFail">Could not remove the image:&#10;{0}</sys:String>
+    <sys:String x:Key="S_Check">Please check:</sys:String>
+    <sys:String x:Key="S_V_Range">{0}: value between {1} and {2}</sys:String>
+    <sys:String x:Key="S_V_Int">{0}: integer between {1} and {2}</sys:String>
+    <sys:String x:Key="S_V_Url">Viewer URL: must be http://… or https://…</sys:String>
+    <sys:String x:Key="S_V_PlcIp">PLC IP is required</sys:String>
+    <sys:String x:Key="S_V_ProgTag">Program tag is required</sys:String>
+    <sys:String x:Key="S_V_Offsets">X / Y offset tags are required</sys:String>
+    <sys:String x:Key="S_ExitAsk">Close IV4 Viewer?</sys:String>
+    <!-- ===== Cameras ===== -->
+    <sys:String x:Key="S_SecCameras">IV4 cameras</sys:String>
+    <sys:String x:Key="S_ActiveCam">Camera connected to this PC</sys:String>
+    <sys:String x:Key="S_CamsNote">Each camera keeps its own viewer URL, PLC tags, reference images and program names. Only the selected camera is shown on this PC.</sys:String>
+    <sys:String x:Key="S_CamName">Name</sys:String>
+    <sys:String x:Key="S_RefCam">Camera:</sys:String>
+    <sys:String x:Key="S_ProgType">Program data type</sys:String>
+    <sys:String x:Key="S_XYType">X / Y data type</sys:String>
+    <sys:String x:Key="S_V_CamUrl">{0}: invalid viewer URL (http://… or https://…)</sys:String>
+    <!-- ===== Viewer mode ===== -->
+    <sys:String x:Key="S_ViewerMode">Viewer mode</sys:String>
+    <sys:String x:Key="S_ModeImage">Direct image (fast)</sys:String>
+    <sys:String x:Key="S_ModeWeb">Web page</sys:String>
+    <sys:String x:Key="S_ImgInterval">Min. time between images (ms)</sys:String>
+    <sys:String x:Key="S_ImgIntervalTip">Direct image mode only. 0 = as fast as the camera answers (~3 images/s).</sys:String>
+    <!-- ===== Ghost overlay ===== -->
+    <sys:String x:Key="S_Ghost">◐ Ghost Mode</sys:String>
+    <sys:String x:Key="S_GhostTip">Hide the reference panel and show the reference image semi-transparent over the live image (direct image mode only).</sys:String>
+    <sys:String x:Key="S_GhostOpacity">Ghost opacity (%)</sys:String>
+    <sys:String x:Key="S_GhostStyle">Ghost style</sys:String>
+    <sys:String x:Key="S_GhostWatermark">Watermark (gray reference over the live image)</sys:String>
+    <sys:String x:Key="S_GhostOutline">Outline (green edges, live fully visible)</sys:String>
+    <sys:String x:Key="S_GhostImage">Transparent image (uses opacity)</sys:String>
+    <!-- ===== Theme ===== -->
+    <sys:String x:Key="S_Theme">Theme</sys:String>
+    <sys:String x:Key="S_ThemeDark">Dark</sys:String>
+    <sys:String x:Key="S_ThemeLight">Light (white background)</sys:String>
+</ResourceDictionary>
